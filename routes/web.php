@@ -21,4 +21,4 @@ Route::get('/', function () {
 });
 Route::get('/fuga', function () {
     return Inertia::render('fuga');
-});
+})->name('fuga');
