@@ -13,12 +13,17 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'greeting' => 'Hello'
-    ]);
+Route::group(['middleware' => ['web'], 'namespace' => 'App\Http\Controllers'], function() {
+    // Route::get('/', function () {
+    //     return Inertia::render('welcome', [
+    //         'greeting' => 'Hello'
+    //     ]);
+    // });
+    Route::get('/login', 'DashboardController@login')->name('login');
+    Route::group(['middleware' => ['auth:sanctum']], function() {
+        Route::get('/', 'DashboardController@index')->name('dashboard.index');
+        // Route::get('/fuga', function () {
+        //     return Inertia::render('fuga');
+        // })->name('fuga');
+    });
 });
-Route::get('/fuga', function () {
-    return Inertia::render('fuga');
-})->name('fuga');

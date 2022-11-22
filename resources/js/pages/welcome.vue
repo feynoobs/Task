@@ -1,6 +1,6 @@
 <script setup>
-import { onMounted } from "vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { onMounted } from 'vue';
+import { InertiaLink, InertiaHead } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     greeting: String,
@@ -8,9 +8,13 @@ const props = defineProps({
 onMounted(() => {
     console.log("Welcome Page mounted");
 });
+function methodName() {
+    props.greeting = new Date();
+}
 </script>
+
 <template>
-    <h1>{{ props.greeting }} Inertia.js</h1>
-    <Link :href="route('fuga')">fuga</Link>
-    a
+    <InertiaHead v-bind:title="'aaa'" />
+    <h1 v-on:click="methodName">{{props.greeting }} Inertia.js</h1>
+    <InertiaLink v-bind:href="route('fuga')">fuga</InertiaLink>
 </template>
